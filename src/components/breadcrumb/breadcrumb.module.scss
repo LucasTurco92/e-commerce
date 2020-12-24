@@ -1,0 +1,15 @@
+.breadCrumbsContainer {
+    font-size: 14px;
+    margin: 16px 0 16px 4px;
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    color: var(--darkGrey);
+    .breadCrumbs {
+        max-width: 1100px;
+        width: 100%;
+        .breadCrumb {
+            display: inline;
+        }
+    }
+}

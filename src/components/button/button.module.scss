@@ -1,0 +1,31 @@
+.buttonContainer {
+    background-color: var(--blue);
+    width: 100%;
+    border-radius: 6px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    .buttonText {
+        color: var(--white);
+        line-height: 1em;
+        font-size: 24px;
+        user-select: none;
+        position: relative;
+        top: -2px;
+    }
+    &:hover {
+        border: 1px solid var(--white);
+        opacity: .9;
+    }
+}
+
+@media (min-width: 1024px) {
+    .buttonContainer {
+        .buttonText {
+            font-size: 16px;
+            position: none;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "name": "meli-challenge",
+    "version": "1.0.0",
+    "scripts": {
+        "dev": "nodemon server/server.js",
+        "build": "next build",
+        "start": "cross-env NODE_ENV=production node server.js"
+    },
+    "dependencies": {
+        "axios": "^0.21.1",
+        "cross-env": "^7.0.2",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "next": "latest",
+        "node-sass": "^5.0.0",
+        "nodemon": "^2.0.6",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1"
+    },
+    "license": "MIT"
+}
