@@ -1,6 +1,6 @@
-import { getAmount } from './commons';
+const { getAmount } = require('./commons');
 
-export const getItemDetails = (rs) => {
+const getItemDetails = (rs) => {
 
     let itemDetails = {
         author: {
@@ -33,14 +33,18 @@ export const getItemDetails = (rs) => {
     return itemDetails;
 }
 
-export const getItemCategories = (rs) => {
+const getItemCategories = (rs) => {
     const categories = rs.data.path_from_root.map(category => category.name);
 
     return categories ? categories : [];
 }
 
-export const getItemDescription = (rs) => {
+const getItemDescription = (rs) => {
     const description = rs.data.plain_text;
 
     return description ? description : '';
 }
+
+exports.getItemCategories = getItemCategories;
+exports.getItemDescription = getItemDescription;
+exports.getItemDetails = getItemDetails;
