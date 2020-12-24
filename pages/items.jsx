@@ -16,7 +16,7 @@ const Items = ({ result }) => {
 };
 
 Items.getInitialProps = async (ctx) => {
-  const search = "perros";
+  const search = ctx.query.search;
 
   const res = await axios.get(
     `${process.env.API_BASE_URL}/api/items?search=${search}`
