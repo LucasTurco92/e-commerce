@@ -6,17 +6,24 @@ const { getItemCategories, getItemDescription, getItemDetails } = require('../ut
 
 router.get('/api/items', async(req, res) => {
     const search = req.query.search;
+
+    const author = {
+        name: 'Lucas',
+        lastname: 'Turco'
+    }
+
     try {
         const rs = await axios.get(
             `${process.env.MELI_SEARCH_URL}/sites/MLA/search?q=:${search}`
         );
 
-        const searchResult = getItems(rs);
+        const items = getItems(rs);
 
-        const categories = searchResult ? getCategories(rs.data.filters) : [];
+        const categories = items ? getCategories(rs.data.filters) : [];
 
         const result = {
-            searchResult: searchResult,
+            author: author,
+            items: items,
             title: "Items",
             categories: categories,
             search: search,

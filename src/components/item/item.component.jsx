@@ -4,7 +4,7 @@ import Styles from "./item.module.scss";
 
 const Item = ({ item }) => {
   const { title, price, picture, free_shipping, address, id } = item;
-  const route = `item`;
+  const route = `items`;
   
   return (
     <div className={Styles.itemContainer}>

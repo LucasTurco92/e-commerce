@@ -4,27 +4,28 @@ import BreadCrumb from "../../src/components/breadcrumb/breadcrumb.component";
 import ItemDetails from "../../src/components/item-details/item-details.component";
 import axios from "axios";
 
-const Item = ({result}) => {
-  const {categories, details, description} = result;
-const itemDetails = details.item;
-
- console.log(result);
+const Item = ({ result }) => {
+  const { categories, details, description } = result;
+  const itemDetails = details.item;
 
   return (
-     <Container title={itemDetails.title}>
-     <SearchBox />
-     <BreadCrumb categories={categories} />
-     <ItemDetails item={itemDetails} description={description}/>
-     </Container>
+    <Container title={itemDetails.title}>
+      <SearchBox />
+      <BreadCrumb categories={categories} />
+      <ItemDetails item={itemDetails} description={description} />
+    </Container>
   );
 };
 
 Item.getInitialProps = async (cxt) => {
   const { id } = cxt.query;
 
-   const rsItemDetails = await axios.get(`${process.env.API_BASE_URL}/api/items/${id}`);
+  const rsItemDetails = await axios.get(
+    `${process.env.API_BASE_URL}/api/items/${id}`
+  );
+
   return {
-    result: rsItemDetails.data
+    result: rsItemDetails.data,
   };
 };
 

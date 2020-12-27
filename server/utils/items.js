@@ -1,20 +1,12 @@
 const { getAmount, getDecimal } = require('./commons');
 const getItems = (rs) => {
     const limit = 4;
-
-    let searchResult = {
-        author: {
-            name: 'Lucas',
-            lastname: 'Turco'
-        },
-        items: []
-    }
+    let itemsResult = [];
 
     const results = rs.data.results;
 
     if (results) {
-        var items = results.slice(0, limit).map(item => {
-
+        itemsResult = results.slice(0, limit).map(item => {
             return {
                 id: item.id,
                 title: item.title,
@@ -29,12 +21,9 @@ const getItems = (rs) => {
                 address: item.address.state_name
             };
         });
-
-        searchResult.categories = getCategories(rs.data.filters)
-        searchResult.items = items;
     }
 
-    return searchResult;
+    return itemsResult;
 };
 
 

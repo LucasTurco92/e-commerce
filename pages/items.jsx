@@ -5,12 +5,12 @@ import SearchBox from "../src/components/search-box/search-box.component";
 import ItemsResults from "../src/components/items-results/items-results.component";
 
 const Items = ({ result }) => {
-  const { title, categories, search, searchResult } = result;
+  const { title, categories, search, items } = result;
   return (
     <Container title={title}>
       <SearchBox value={search} />
       <BreadCrumb categories={categories} />
-      <ItemsResults items={searchResult.items} />
+      <ItemsResults items={items} />
     </Container>
   );
 };
