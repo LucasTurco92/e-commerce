@@ -1,17 +1,11 @@
 const { getAmount } = require('./commons');
+const axios = require('axios');
 
 const getItemDetails = (rs) => {
-
-    let itemDetails = {
-        author: {
-            name: 'Lucas',
-            lastname: 'Turco'
-        },
-        item: ''
-    }
-
+    let itemDetails = {};
     const result = rs.data;
-    if (result) {
+
+    if (rs.status == 200 && result) {
         const item = {
             id: result.id,
             title: result.title,
@@ -27,24 +21,20 @@ const getItemDetails = (rs) => {
             description: ''
         }
 
-        itemDetails.item = item;
+        itemDetails = item;
     }
 
     return itemDetails;
 }
 
 const getItemCategories = (rs) => {
-    const categories = rs.data.path_from_root.map(category => category.name);
-
-    return categories ? categories : [];
+    return rs.status == 200 && rs.data.path_from_root ? rs.data.path_from_root.map(category => category.name) : [];
 }
 
 const getItemDescription = (rs) => {
-    const description = rs.data.plain_text;
-
-    return description ? description : '';
+    return rs.status == 200 && rs.data.plain_text ? rs.data.plain_text : '';
 }
 
 exports.getItemCategories = getItemCategories;
-exports.getItemDescription = getItemDescription;
 exports.getItemDetails = getItemDetails;
+exports.getItemDescription = getItemDescription;

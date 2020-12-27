@@ -3,14 +3,14 @@ const router = express()
 const axios = require('axios')
 const { getItems, getCategories } = require('../utils/items.js')
 const { getItemCategories, getItemDescription, getItemDetails } = require('../utils/item-details.js')
+const author = {
+    name: 'Lucas',
+    lastname: 'Turco'
+}
+
 
 router.get('/api/items', async(req, res) => {
     const search = req.query.search;
-
-    const author = {
-        name: 'Lucas',
-        lastname: 'Turco'
-    }
 
     try {
         const rs = await axios.get(
@@ -31,7 +31,14 @@ router.get('/api/items', async(req, res) => {
 
         res.status(200).send(result);
     } catch (error) {
-        res.status(404).send(error);
+        const badResult = {
+            author: author,
+            items: [],
+            title: "Ups algo salió mal!",
+            categories: [],
+            search: search,
+        };
+        res.status(200).send(badResult);
     }
 });
 
@@ -43,33 +50,34 @@ router.get('/api/items/:id', async(req, res) => {
             `${process.env.MELI_SEARCH_URL}/items/${id}`
         );
 
-        const itemDetails = getItemDetails(rs);
+        const item = getItemDetails(rs);
 
-        const thereIsAResultItem = itemDetails.item != "";
-
-        const description =
-            thereIsAResultItem ?
-            getItemDescription(
-                await axios.get(`${process.env.MELI_SEARCH_URL}/items/${id}/description`)
-            ) :
-            "";
+        const thereIsAnItem = item != "";
 
         const categories =
-            thereIsAResultItem ?
+            thereIsAnItem ?
             getItemCategories(
                 await axios.get(
-                    `${process.env.MELI_SEARCH_URL}/categories/${itemDetails.item.category}`
+                    `${process.env.MELI_SEARCH_URL}/categories/${item.category}`
                 )
             ) : [];
 
+        item.description = thereIsAnItem ? getItemDescription(await axios.get(`${process.env.MELI_SEARCH_URL}/items/${id}/description`)) : '';
+
         const result = {
-            details: itemDetails,
-            categories: categories,
-            description: description
+            author: author,
+            item: item,
+            categories: categories
         }
         res.status(200).send(result);
     } catch (error) {
-        res.status(404).send(error);
+        const badResult = {
+            author: author,
+            item: { title: 'Ups algo salió mal!' },
+            categories: [],
+        };
+
+        res.status(200).send(badResult);
     }
 });
 

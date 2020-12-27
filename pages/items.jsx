@@ -3,6 +3,7 @@ import axios from "axios";
 import BreadCrumb from "../src/components/breadcrumb/breadcrumb.component";
 import SearchBox from "../src/components/search-box/search-box.component";
 import ItemsResults from "../src/components/items-results/items-results.component";
+import ErrorMessage from "../src/components/error-message/error-message.component";
 
 const Items = ({ result }) => {
   const { title, categories, search, items } = result;
@@ -10,7 +11,7 @@ const Items = ({ result }) => {
     <Container title={title}>
       <SearchBox value={search} />
       <BreadCrumb categories={categories} />
-      <ItemsResults items={items} />
+      {items.length > 0 ? <ItemsResults items={items} /> : <ErrorMessage message={title} />}
     </Container>
   );
 };

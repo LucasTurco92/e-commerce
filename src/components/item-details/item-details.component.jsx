@@ -1,13 +1,14 @@
 import Button from "../button/button.component";
 import Styles from "./item-details.module.scss";
 
-const ItemDetails = ({ item, description }) => {
+const ItemDetails = ({ item }) => {
   const {
     id,
     title,
     picture,
     price,
     condition,
+    description,
     sold_quantity,
   } = item;
 

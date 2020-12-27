@@ -3,10 +3,8 @@ const getItems = (rs) => {
     const limit = 4;
     let itemsResult = [];
 
-    const results = rs.data.results;
-
-    if (results) {
-        itemsResult = results.slice(0, limit).map(item => {
+    if (rs.status == 200 && rs.data.results) {
+        itemsResult = rs.data.results.slice(0, limit).map(item => {
             return {
                 id: item.id,
                 title: item.title,

@@ -3,16 +3,20 @@ import SearchBox from "../../src/components/search-box/search-box.component";
 import BreadCrumb from "../../src/components/breadcrumb/breadcrumb.component";
 import ItemDetails from "../../src/components/item-details/item-details.component";
 import axios from "axios";
+import ErrorMessage from "../../src/components/error-message/error-message.component";
 
 const Item = ({ result }) => {
-  const { categories, details, description } = result;
-  const itemDetails = details.item;
+  const { categories, item, description } = result;
 
   return (
-    <Container title={itemDetails.title}>
+    <Container title={item.title}>
       <SearchBox />
       <BreadCrumb categories={categories} />
-      <ItemDetails item={itemDetails} description={description} />
+      {item.id ? (
+        <ItemDetails item={item}/>
+      ) : (
+        <ErrorMessage message={item.title} />
+      )}
     </Container>
   );
 };
@@ -20,12 +24,10 @@ const Item = ({ result }) => {
 Item.getInitialProps = async (cxt) => {
   const { id } = cxt.query;
 
-  const rsItemDetails = await axios.get(
-    `${process.env.API_BASE_URL}/api/items/${id}`
-  );
+  const rsItem = await axios.get(`${process.env.API_BASE_URL}/api/items/${id}`);
 
   return {
-    result: rsItemDetails.data,
+    result: rsItem.data,
   };
 };
 
