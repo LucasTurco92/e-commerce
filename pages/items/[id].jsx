@@ -6,7 +6,7 @@ import axios from "axios";
 import ErrorMessage from "../../src/components/error-message/error-message.component";
 
 const Item = ({ result }) => {
-  const { categories, item, description } = result;
+  const { categories, item } = result;
 
   return (
     <Container title={item.title}>

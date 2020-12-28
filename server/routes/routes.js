@@ -21,10 +21,12 @@ router.get('/api/items', async(req, res) => {
 
         const categories = items ? getCategories(rs.data.filters) : [];
 
+        const title = items.legth > 0 && categories > 0 ? 'Items' : `No hay publicaciones que coincidan con tu búsqueda, "${search}".`;
+
         const result = {
             author: author,
             items: items,
-            title: "Items",
+            title: title,
             categories: categories,
             search: search,
         };
