@@ -4,7 +4,9 @@ const getItems = (rs) => {
     let itemsResult = [];
 
     if (rs.status == 200 && rs.data.results) {
+
         itemsResult = rs.data.results.slice(0, limit).map(item => {
+
             return {
                 id: item.id,
                 title: item.title,

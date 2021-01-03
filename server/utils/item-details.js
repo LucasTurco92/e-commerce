@@ -1,5 +1,4 @@
 const { getAmount } = require('./commons');
-const axios = require('axios');
 
 const getItemDetails = (rs) => {
     let itemDetails = {};
@@ -15,7 +14,7 @@ const getItemDetails = (rs) => {
             },
             picture: result.pictures[0].url,
             condition: result.condition,
-            free_shipping: result.free_shipping,
+            free_shipping: result.shipping.free_shipping,
             sold_quantity: result.sold_quantity,
             category: result.category_id,
             description: ''
@@ -28,10 +27,12 @@ const getItemDetails = (rs) => {
 }
 
 const getItemCategories = (rs) => {
+
     return rs.status == 200 && rs.data.path_from_root ? rs.data.path_from_root.map(category => category.name) : [];
 }
 
 const getItemDescription = (rs) => {
+
     return rs.status == 200 && rs.data.plain_text ? rs.data.plain_text : '';
 }
 

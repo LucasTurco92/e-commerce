@@ -4,7 +4,8 @@
     "scripts": {
         "dev": "nodemon server/server.js",
         "build": "next build",
-        "start": "cross-env NODE_ENV=production node server.js"
+        "start": "cross-env NODE_ENV=production node server.js",
+        "test": "jest"
     },
     "dependencies": {
         "axios": "^0.21.1",
@@ -17,5 +18,8 @@
         "react": "^16.13.1",
         "react-dom": "^16.13.1"
     },
-    "license": "MIT"
+    "license": "MIT",
+    "devDependencies": {
+        "jest": "^26.6.3"
+    }
 }
